@@ -3,7 +3,9 @@ package fr.eseo.dis.lemerlal.somanager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SoManager extends AppCompatActivity {
+import fr.eseo.dis.lemerlal.somanager.R;
+
+public class SoManagerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

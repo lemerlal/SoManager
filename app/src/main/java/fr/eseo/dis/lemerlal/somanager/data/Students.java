@@ -1,4 +1,4 @@
-package fr.eseo.dis.lemerlal.somanager;
+package fr.eseo.dis.lemerlal.somanager.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

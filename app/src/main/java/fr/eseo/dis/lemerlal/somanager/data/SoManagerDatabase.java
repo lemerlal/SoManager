@@ -1,4 +1,4 @@
-package fr.eseo.dis.lemerlal.somanager;
+package fr.eseo.dis.lemerlal.somanager.data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
