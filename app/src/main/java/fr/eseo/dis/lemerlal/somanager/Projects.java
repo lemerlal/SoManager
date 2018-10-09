@@ -29,22 +29,21 @@ public class Projects {
     private int confid;
 
     @NonNull
-    private String[][] supervisor;
+    private int idSupervisor;
 
-    @NonNull
-    @Relation(parentColumn = "user_id", entityColumn = "user_id", entity = Students.class)
-    private List<Students> students;
+    public Projects(int projectID, @NonNull String title){
+        this.projectID=projectID;
+        this.title=title;
+    }
 
 
-
-    public Projects(@NonNull String[][] supervisor, int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull List<Students> students) {
+    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull int idSupervisors) {
         this.projectID = projectID;
         this.title = title;
         this.descrip = descrip;
         this.poster = poster;
         this.confid = confid;
-        this.students = students;
-        this.supervisor = supervisor;
+        this.idSupervisor = idSupervisor;
     }
 
 
@@ -72,10 +71,6 @@ public class Projects {
         return confid;
     }
 
-    @NonNull
-    public List<Students> getStudents() {
-        return students;
-    }
 
     public void setProjectID(int projectID) {
         this.projectID = projectID;
@@ -97,16 +92,13 @@ public class Projects {
         this.confid = confid;
     }
 
-    public void setStudents(@NonNull List<Students> students) {
-        this.students = students;
-    }
 
     @NonNull
-    public String[][] getSupervisor() {
-        return supervisor;
+    public int getIdSupervisor() {
+        return idSupervisor;
     }
 
-    public void setSupervisor(@NonNull String[][] supervisor) {
-        this.supervisor = supervisor;
+    public void setIdSupervisor(@NonNull int idSupervisor) {
+        this.idSupervisor = idSupervisor;
     }
 }

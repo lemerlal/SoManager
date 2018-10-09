@@ -8,8 +8,8 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "students")
 public class Students {
     @PrimaryKey
-    @ColumnInfo(name="id_user")
-    private int userID;
+    @ColumnInfo(name="id_student")
+    private int studentID;
 
     @NonNull
     private String surename;
@@ -18,14 +18,14 @@ public class Students {
     private String forename;
 
 
-    public Students(int userID, @NonNull String surename, @NonNull String forename) {
-        this.userID = userID;
+    public Students(int studentID, @NonNull String surename, @NonNull String forename) {
+        this.studentID = studentID;
         this.surename = surename;
         this.forename = forename;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getStudentID() {
+        return studentID;
     }
 
     @NonNull
@@ -38,8 +38,8 @@ public class Students {
         return forename;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setStudentID(int userID) {
+        this.studentID = userID;
     }
 
     public void setSurename(@NonNull String surename) {
