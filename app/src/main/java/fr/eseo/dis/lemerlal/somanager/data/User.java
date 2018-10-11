@@ -17,6 +17,12 @@ public class User {
     @NonNull
     private String pass;
 
+    @NonNull
+    private String surename;
+
+    @NonNull
+    private String forename;
+
 
     public int getUserId() {
         return userId;
@@ -30,6 +36,19 @@ public class User {
         this.userId=userId;
         this.user = user;
         this.pass = pass;
+        this.surename = surename;
+        this.forename = forename;
+    }
+
+
+    @NonNull
+    public String getSurename() {
+        return surename;
+    }
+
+    @NonNull
+    public String getForename() {
+        return forename;
     }
 
     @NonNull
@@ -48,6 +67,14 @@ public class User {
 
     public void setPass(@NonNull String pass) {
         this.pass = pass;
+    }
+
+    public void setSurename(@NonNull String surename) {
+        this.surename = surename;
+    }
+
+    public void setForename(@NonNull String forename) {
+        this.forename = forename;
     }
 }
 
