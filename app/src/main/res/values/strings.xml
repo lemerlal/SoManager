@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SoManager</string>
     <string name="supervisor_label">Supervisor:\u0020</string>
+    <string name="name_hint"> identifiant</string>
+    <string name="name_mp">mp</string>
+
 </resources>
