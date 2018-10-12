@@ -30,6 +30,7 @@ public abstract class SoManagerDatabase extends RoomDatabase {
             // and have a filename where the database will be stored physically on the device
             INSTANCE = Room.databaseBuilder(context, SoManagerDatabase.class, "soManager.db")
                     // For ease of use only => Need to delete this for production code
+                    .allowMainThreadQueries()
                     .addCallback(new SoManagerDatabaseCallback())
                     //When migrating delete the database and recreate it
                     .fallbackToDestructiveMigration()

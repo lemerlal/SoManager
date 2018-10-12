@@ -32,7 +32,7 @@ public class User {
         this.userId = userId;
     }
 
-    public User(int userId, @NonNull String user, @NonNull String pass) {
+    public User(int userId, @NonNull String user, @NonNull String pass, @NonNull String surename, @NonNull String forename) {
         this.userId=userId;
         this.user = user;
         this.pass = pass;

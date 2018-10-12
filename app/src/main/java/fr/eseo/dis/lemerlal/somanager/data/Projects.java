@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-@Entity(tableName = "project")
+@Entity(tableName = "projects")
 
 public class Projects implements Parcelable{
 

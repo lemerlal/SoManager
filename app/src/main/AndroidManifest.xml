@@ -17,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PFEActivity"></activity>
+        <activity android:name=".PFEDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,17 @@ import android.util.Log;
 
 public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
 
+    private static String[] INSERT_user = new String[] {
+            "INSERT INTO users VALUES(1,'lemerlal','1234','Alexandre','Lemerle');",
+            "INSERT INTO users VALUES(2,'nordstga','1234','Gaelle','Nordstrom');",
+
+    };
+
+    private static String[] INSERT_Students = new String[]{
+            "INSERT INTO students VALUES(1,'alexandre','lemerle');",
+            "INSERT INTO students VALUES(2,'thomas','dfdff');",
+    };
+
     private static String[] INSERT_Juries = new String[] {
 
             "INSERT INTO juries VALUES(1,2015/08/15);",
@@ -24,26 +35,15 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
 
     };
 
-    private static String[] INSERT_Projects = new String[] {
-            "INSERT INTO projects VALUES(1,'pfe','dcdscd',false,1,1);",
-            "INSERT INTO projects VALUES(2,'gpi','ghhhgh',true,0,2);",
-
-    };
-
-    private static String[] INSERT_Students = new String[]{
-            "INSERT INTO students VALUES(1,'alexandre','lemerle');",
-            "INSERT INTO students VALUES(2,'thomas','dfdff');",
-    };
-
     private static String[] INSERT_ROLES = new String[] {
-            "INSERT INTO roles VALUES(1);",
-            "INSERT INTO roles VALUES(2);",
+            "INSERT INTO role VALUES(0,1);",
+            "INSERT INTO role VALUES(1,2);",
 
     };
 
-    private static String[] INSERT_user = new String[] {
-            "INSERT INTO users VALUES('lemerlal','dfsffkl');",
-            "INSERT INTO users VALUES('dfdsfdf','fgdfg');",
+    private static String[] INSERT_Projects = new String[] {
+            "INSERT INTO projects VALUES(1,'pfe','dcdscd','false',1,1);",
+            "INSERT INTO projects VALUES(2,'gpi','ghhhgh','true',0,2);",
 
     };
 
@@ -55,19 +55,11 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
                 db.execSQL(creationQuery);
             }
         */
-        Log.d("ROOM_Database_Insert:","Insert Artistes");
-        for(String creationQuery : INSERT_Juries){
+        Log.d("ROOM_Database_Insert:","Insert User");
+        for(String creationQuery : INSERT_user){
             db.execSQL(creationQuery);
         }
-        Log.d("ROOM_Database_Insert:","Insert Internautes");
-        for(String creationQuery : INSERT_Notes){
-            db.execSQL(creationQuery);
-        }
-        Log.d("ROOM_Database_Insert:","Insert Pays");
-        for(String creationQuery : INSERT_Projects){
-            db.execSQL(creationQuery);
-        }
-        Log.d("ROOM_Database_Insert:","Insert Films");
+        Log.d("ROOM_Database_Insert:","Insert Students");
         for(String creationQuery : INSERT_Students){
             db.execSQL(creationQuery);
         }
@@ -75,8 +67,16 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
         for(String creationQuery : INSERT_ROLES){
             db.execSQL(creationQuery);
         }
-        Log.d("ROOM_Database_Insert:","Insert Notations");
-        for(String creationQuery : INSERT_user){
+        Log.d("ROOM_Database_Insert:","Insert Projects");
+        for(String creationQuery : INSERT_Projects){
+            db.execSQL(creationQuery);
+        }
+        Log.d("ROOM_Database_Insert:","Insert Juries");
+        for(String creationQuery : INSERT_Juries){
+            db.execSQL(creationQuery);
+        }
+        Log.d("ROOM_Database_Insert:","Insert Notes");
+        for(String creationQuery : INSERT_Notes){
             db.execSQL(creationQuery);
         }
     }

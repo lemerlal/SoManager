@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
@@ -33,6 +34,7 @@ public class PFEActivity extends AppCompatActivity {
 
     private void loadAllProjectsData(){
         pfeAdapter.setProjects(SoManagerDatabase.getDatabase(PFEActivity.this).projectsDao().findAllProjects());
+        Log.d("test_database:","Database set");
     }
     //database : voir projet 4 impelmentation
 

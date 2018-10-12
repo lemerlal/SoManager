@@ -52,7 +52,7 @@ public class PFEAdapter extends RecyclerView.Adapter<PFEAdapter.PFEViewHolder>{
         final Projects project = projects.get(position);
         holder.title.setText(project.getTitle());
         holder.description.setText(project.getDescrip());
-        holder.confid.setText(String.valueOf(project.getConfid()));
+        holder.confid.setText("Confid"+String.valueOf(project.getConfid()));
         if (positionsExpanded.contains(position)) {
             holder.description.setVisibility(View.VISIBLE);
         } else {
