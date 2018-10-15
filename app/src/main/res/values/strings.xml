@@ -3,6 +3,8 @@
     <string name="supervisor_label">Supervisor:\u0020</string>
     <string name="name_hint"> identifiant</string>
     <string name="name_mp">mp</string>
-    <string name="show_button">Say Hello</string>
+    <string name="menu_button">Menu</string>
+    <string name="pfe_button">PFE</string>
+    <string name="juries_button">Juries</string>
 
 </resources>

@@ -54,7 +54,6 @@ public class PFEDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        title.setText(project.getTitle());
         description.setText(project.getDescrip());
         RecyclerView recycler = findViewById(R.id.details_students);
         recycler.setHasFixedSize(true);

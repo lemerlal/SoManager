@@ -10,34 +10,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <EditText
-        android:id="@+id/edit_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name_hint"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edit_mp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name_mp"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/menu_button"
+        android:id="@+id/pfe_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menu_button" />
+        android:text="@string/pfe_button" />
+
+    <Button
+        android:id="@+id/juries_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/juries_button" />
 
     </LinearLayout>
 

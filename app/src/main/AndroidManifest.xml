@@ -17,8 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MenuActivity"></activity>
         <activity android:name=".PFEActivity"></activity>
         <activity android:name=".PFEDetailsActivity"></activity>
+        <activity android:name=".JuriesActivity"></activity>
+        <activity android:name=".JuriesDetailsActivity"></activity>
     </application>
 
 </manifest>

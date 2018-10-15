@@ -34,9 +34,7 @@ public class PFEActivity extends AppCompatActivity {
 
     private void loadAllProjectsData(){
         pfeAdapter.setProjects(SoManagerDatabase.getDatabase(PFEActivity.this).projectsDao().findAllProjects());
-        Log.d("test_database:","Database set");
     }
-    //database : voir projet 4 impelmentation
 
     public void clickProjectCard(Projects project) {
         Intent intent = new Intent(this, PFEDetailsActivity.class);
