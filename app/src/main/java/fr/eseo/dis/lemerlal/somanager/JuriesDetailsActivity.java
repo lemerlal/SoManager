@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -35,31 +36,31 @@ public class JuriesDetailsActivity extends AppCompatActivity {
         jury = (Juries) data.getParcelable(JuriesActivity.JURIES_EXTRA);
         idJuries = findViewById(R.id.tv_details_id);
         date = findViewById(R.id.tv_details_date);
-        idJuries.setText(jury.getJuryID());
+        idJuries.setText(String.valueOf(jury.getJuryID()));
         date.setText(String.valueOf(jury.getDate()));
         RecyclerView recycler = findViewById(R.id.details_projectsjury);
         recycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(llm);
+        projectsAdapter = new ProjectsJuriesAdapter(this);
         recycler.setAdapter(projectsAdapter);
         loadJuriesDetails();
     }
 
     private void loadJuriesDetails(){
-        Projects juriesProject = null;
+        Projects project = null;
         int indiceProject = 0;
         List<Projects> projects = SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao()
                 .findAllProjects();
-        while(indiceProject < projects.size() && juriesProject == null){
+        while(indiceProject < projects.size() && project == null ){
             if(projects.get(indiceProject).getProjectID() == jury.getJuryProjectId()){
-                juriesProject = projects.get(indiceProject);
-            }
-            else{
+                project=projects.get(indiceProject);
+            } else{
                 indiceProject++;
             }
         }
-        projectsAdapter.setJuryProject(juriesProject);
+        projectsAdapter.setJuryProject(project);
         DecimalFormat df = new DecimalFormat("0.0");
         projectsAdapter.notifyDataSetChanged();
     }

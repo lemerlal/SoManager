@@ -21,7 +21,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
 
     private List<Students> students;
 
-    public StudentsAdapter(Context context, int idFilm){
+    public StudentsAdapter(Context context){
         this.context = context;
         students = new ArrayList<>();
     }
