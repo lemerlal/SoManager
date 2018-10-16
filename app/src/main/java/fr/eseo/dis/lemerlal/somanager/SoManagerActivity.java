@@ -1,17 +1,20 @@
 package fr.eseo.dis.lemerlal.somanager;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.app.Application;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
@@ -26,16 +29,6 @@ public class SoManagerActivity extends AppCompatActivity {
 
         editNameView = (TextView) findViewById(R.id.edit_name);
         editmpView = (TextView) findViewById(R.id.edit_mp);
-
-        Button menuSecondActivityButton = findViewById(R.id.menu_button);
-        menuSecondActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }
 
