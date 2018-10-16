@@ -90,11 +90,14 @@ public class PFEDetailsActivity extends AppCompatActivity {
         studentsAdapter.setRoles(usersStudents);
         supervisor.setText(getString(R.string.supervisor_label) + supervisorProject.getSurename()+" "+supervisorProject.getForename());
         DecimalFormat df = new DecimalFormat("0.0");
+        while(indiceSupervisor < user.size() && supervisorProject == null){
+            if(user.get(indiceSupervisor).getUserId() == project.getIdSupervisor()){
+                supervisorProject = user.get(indiceSupervisor);
+            }
+            else{
+                indiceSupervisor++;
+            }
+        }
         studentsAdapter.notifyDataSetChanged();
-        //if (projectPoster) { => gerer situation poster non present
-            poster.setVisibility(View.VISIBLE);
-        //} else {
-        //    poster.setVisibility(View.GONE);
-        //}
     }
 }
