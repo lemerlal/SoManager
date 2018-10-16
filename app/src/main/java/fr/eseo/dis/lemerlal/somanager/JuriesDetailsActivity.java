@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -24,6 +26,7 @@ public class JuriesDetailsActivity extends AppCompatActivity {
     private TextView idJuries;
     private TextView date;
     private Juries jury;
+    private Button notes;
     private ProjectsJuriesAdapter projectsAdapter;
 
     @Override

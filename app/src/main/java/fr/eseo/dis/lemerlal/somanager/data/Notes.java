@@ -2,11 +2,24 @@ package fr.eseo.dis.lemerlal.somanager.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "notes")
-public class Notes {
+public class Notes implements Parcelable {
+
+    public static final Parcelable.Creator<Notes> CREATOR = new Parcelable.Creator<Notes>(){
+        public Notes createFromParcel(Parcel source){
+            return new Notes(source);
+        }
+
+        public Notes[] newArray(int size){
+            return new Notes[size];
+        }
+    };
     @PrimaryKey
     @ColumnInfo(name="id_user")
     private int userID;
@@ -30,6 +43,15 @@ public class Notes {
         this.forename = forename;
         this.myNote = myNote;
         this.avgNote = avgNote;
+    }
+
+    @Ignore
+    public Notes(Parcel in){
+        this.userID = in.readInt();
+        this.surename = in.readString();
+        this.forename = in.readString();
+        this.myNote = in.readDouble();
+        this.avgNote = in.readDouble();
     }
 
     public int getUserID() {
@@ -74,6 +96,20 @@ public class Notes {
 
     public void setAvgNote(@NonNull double avgNote) {
         this.avgNote = avgNote;
+    }
+
+    @Ignore
+    public int describeContents(){
+        return 0;
+    }
+
+    @Ignore
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeInt(this.userID);
+        dest.writeString(this.surename);
+        dest.writeString(this.forename);
+        dest.writeDouble(this.myNote);
+        dest.writeDouble(this.avgNote);
     }
 }
 
