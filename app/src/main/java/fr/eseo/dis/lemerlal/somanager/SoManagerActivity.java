@@ -1,8 +1,14 @@
 package fr.eseo.dis.lemerlal.somanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,33 +36,48 @@ import javax.net.ssl.TrustManagerFactory;
 
 
 public class SoManagerActivity extends AppCompatActivity {
-
+    private  EditText textuser;
+    private EditText textmp;
+    private Button connexion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_so_manager);
 
 
-        RequestQueue rq = Volley.newRequestQueue(this, new HurlStack(null, getSocketFactory()));
-        String url ="https://192.168.4.248/pfe/webservice.php?q=LOGON&user=alberpat&pass=w872o32HkYAO";
 
-        StringRequest s = new StringRequest(Request.Method.GET,  url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
+        textuser = findViewById(R.id.edit_user);
+        textmp = findViewById(R.id.edit_mp);
+        connexion =  findViewById(R.id.button_connexion);
 
-                        Log.e("RESULT",s);
+        connexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
 
-                    }
-                },
+                RequestQueue rq = Volley.newRequestQueue(SoManagerActivity.this, new HurlStack(null, getSocketFactory()));
+                String url ="https://192.168.4.248/pfe/webservice.php?q=LOGON&user="+textuser.getText().toString()+"&pass="+textmp.getText().toString();
 
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("RESULTfailder",volleyError.getMessage()); }
-                } );
+                StringRequest s = new StringRequest(Request.Method.GET,  url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String s) {
 
-        rq.add(s);
+                                Log.e("RESULT",s);
+                                Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                            }
+                        },
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Log.e("RESULTfailder",volleyError.getMessage()); }
+                        } );
+
+                rq.add(s);
+        }
+    });
+
 
 
     }

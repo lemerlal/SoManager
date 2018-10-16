@@ -11,18 +11,6 @@
         android:orientation="vertical"
         >
 
-    <Button
-        android:id="@+id/pfe_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pfe_button" />
-
-    <Button
-        android:id="@+id/juries_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/juries_button" />
-
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
