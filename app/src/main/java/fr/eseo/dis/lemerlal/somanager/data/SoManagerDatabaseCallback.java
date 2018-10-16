@@ -24,8 +24,8 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
 
     private static String[] INSERT_Juries = new String[] {
 
-            "INSERT INTO juries VALUES(1,2015/08/15);",
-            "INSERT INTO juries VALUES(2,2018/04/15);",
+            "INSERT INTO juries VALUES(1,2015/08/15,1);",
+            "INSERT INTO juries VALUES(2,2018/04/15,2);",
 
 
     };

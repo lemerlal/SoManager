@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 
-@Database(entities = {Juries.class, Notes.class, Projects.class, Students.class, User.class,Role.class}, version =1)
+@Database(entities = {Juries.class, Notes.class, Projects.class, Students.class, User.class,Role.class}, version =1, exportSchema = false)
 public abstract class SoManagerDatabase extends RoomDatabase {
 
     private static SoManagerDatabase INSTANCE;

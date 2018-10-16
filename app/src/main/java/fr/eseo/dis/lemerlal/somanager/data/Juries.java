@@ -18,10 +18,14 @@ public class Juries {
         @NonNull
         private String date;
 
+        @NonNull
+        private int juryProjectId;
 
-    public Juries(int juryID, @NonNull String date) {
+
+    public Juries(int juryID, @NonNull String date, @NonNull int juryProjectId) {
         this.juryID = juryID;
         this.date = date;
+        this.juryProjectId = juryProjectId;
     }
 
     public int getJuryID() {
@@ -33,6 +37,11 @@ public class Juries {
         return date;
     }
 
+    @NonNull
+    public int getJuryProjectId() {
+        return juryProjectId;
+    }
+
 
     public void setJuryID(int juryID) {
         this.juryID = juryID;
@@ -40,6 +49,10 @@ public class Juries {
 
     public void setDate(@NonNull String date) {
         this.date = date;
+    }
+
+    public void setJuryProjectId(@NonNull int juryProjectId) {
+        this.juryProjectId = juryProjectId;
     }
 
 }

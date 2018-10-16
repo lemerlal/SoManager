@@ -16,13 +16,14 @@ import fr.eseo.dis.lemerlal.somanager.data.Juries;
 import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 import fr.eseo.dis.lemerlal.somanager.data.adapters.PFEAdapter;
+import fr.eseo.dis.lemerlal.somanager.data.adapters.ProjectsJuriesAdapter;
 
 public class JuriesDetailsActivity extends AppCompatActivity {
 
     private TextView idJuries;
     private TextView date;
     private Juries jury;
-    private PFEAdapter projectsAdapter;
+    private ProjectsJuriesAdapter projectsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,14 +46,20 @@ public class JuriesDetailsActivity extends AppCompatActivity {
         loadJuriesDetails();
     }
 
-    // comment recupere ton les projects d'un jurie ?
     private void loadJuriesDetails(){
-        List<Projects> juriesProjects = new ArrayList<>();
-        for(Projects projects : SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao().findAllProjects()){
-            //if(projects.getProjectID() == jury.getProjectID()) {
-            //    juriesProjects.add(projects);
-            //}
+        Projects juriesProject = null;
+        int indiceProject = 0;
+        List<Projects> projects = SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao()
+                .findAllProjects();
+        while(indiceProject < projects.size() && juriesProject == null){
+            if(projects.get(indiceProject).getProjectID() == jury.getJuryProjectId()){
+                juriesProject = projects.get(indiceProject);
+            }
+            else{
+                indiceProject++;
+            }
         }
+        projectsAdapter.setJuryProject(juriesProject);
         DecimalFormat df = new DecimalFormat("0.0");
         projectsAdapter.notifyDataSetChanged();
     }

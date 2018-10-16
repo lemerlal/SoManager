@@ -52,6 +52,12 @@ public class JuriesAdapter extends RecyclerView.Adapter<JuriesAdapter.JuriesView
         final Juries jury = Juries.get(position);
         holder.idJuries.setText(String.valueOf(jury.getJuryID()));
         holder.date.setText("Date"+String.valueOf(jury.getDate()));
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.clickJuriesCard(jury);
+            }
+        });
     }
 
     class JuriesViewHolder extends RecyclerView.ViewHolder{
