@@ -14,8 +14,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +45,7 @@ public class SoManagerActivity extends AppCompatActivity {
     private  EditText textuser;
     private EditText textmp;
     private Button connexion;
+    private TextView erreurConnexion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,7 @@ public class SoManagerActivity extends AppCompatActivity {
         textuser = findViewById(R.id.edit_user);
         textmp = findViewById(R.id.edit_mp);
         connexion =  findViewById(R.id.button_connexion);
+        erreurConnexion = findViewById(R.id.erreur_connexion);
 
         connexion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +65,24 @@ public class SoManagerActivity extends AppCompatActivity {
                 RequestQueue rq = Volley.newRequestQueue(SoManagerActivity.this, new HurlStack(null, getSocketFactory()));
                 String url ="https://192.168.4.248/pfe/webservice.php?q=LOGON&user="+textuser.getText().toString()+"&pass="+textmp.getText().toString();
 
-                StringRequest s = new StringRequest(Request.Method.GET,  url,
-                        new Response.Listener<String>() {
+                JsonObjectRequest s = new JsonObjectRequest(Request.Method.GET,  url,   null,
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(String s) {
+                            public void onResponse(JSONObject s) {
+                                try {
+                                    String resultat = s.getString("result");
+                                    if(resultat.equals("OK")){
+                                        Log.e("RESULT", String.valueOf(s));
+                                        Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
+                                        startActivity(intent);
+                                    }else if(resultat.equals("KO")){
+                                        erreurConnexion.setText("Erreur Connexion");
+                                        Log.e("ErreurConnexion", String.valueOf(s));
+                                    }
 
-                                Log.e("RESULT",s);
-                                Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
-                                startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         },
 
