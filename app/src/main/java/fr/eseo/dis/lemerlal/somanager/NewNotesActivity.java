@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import fr.eseo.dis.lemerlal.somanager.data.Notes;
+import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
+
 public class NewNotesActivity extends AppCompatActivity {
 
     private TextView editNotesView;
-    public static String USERS_NAME_EXTRA;
+    private Notes notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +21,14 @@ public class NewNotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_notes);
         Button giveNewNotesActivityButton = findViewById(R.id.give_new_notes_button);
         editNotesView = (TextView)findViewById(R.id.edit_name);
+        Intent intent = getIntent();
+        Bundle data = intent.getExtras();
+        notes = (Notes) data.getParcelable(NotesActivity.NOTES_EXTRA);
         giveNewNotesActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String newNotes = editNotesView.getText().toString();
+                SoManagerDatabase.getDatabase(NewNotesActivity.this).notesDao().updateMyNote(Integer.parseInt(newNotes),notes.getUserID());
                 Intent intent = new Intent(NewNotesActivity.this, NotesActivity.class);
                 startActivity(intent);
             }

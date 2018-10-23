@@ -5,5 +5,6 @@
     <string name="name_mp">mp</string>
     <string name="pfe_button">PFE</string>
     <string name="juries_button">JURIES</string>
-
+    <string name="notes_button">Notes</string>
+    <string name="pfe_random_button">Random</string>
 </resources>

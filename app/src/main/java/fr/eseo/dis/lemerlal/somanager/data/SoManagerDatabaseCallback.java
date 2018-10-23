@@ -42,8 +42,18 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
     };
 
     private static String[] INSERT_Projects = new String[] {
-            "INSERT INTO projects VALUES(1,'pfe','dcdscd','false',1,1);",
-            "INSERT INTO projects VALUES(2,'gpi','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(1,'a','dcdscd','false',1,1);",
+            "INSERT INTO projects VALUES(2,'b','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(3,'c','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(4,'d','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(5,'f','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(6,'g','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(7,'h','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(8,'i','ghhhgh','true',0,2);",
+            "INSERT INTO projects VALUES(9,'j','ghhhgh','true',0,2);",
+
+
+
 
     };
 

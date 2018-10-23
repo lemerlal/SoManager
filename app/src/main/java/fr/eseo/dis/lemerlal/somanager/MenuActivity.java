@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -33,6 +35,34 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Button pfeSecondActivityButton = findViewById(R.id.pfe_button);
+        pfeSecondActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, PFEActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button juriesSecondActivityButton = findViewById(R.id.juries_button);
+        juriesSecondActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, JuriesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button notesSecondActivityButton = findViewById(R.id.notes_button);
+        notesSecondActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, NotesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         textUser = findViewById(R.id.token);
         textToken = findViewById(R.id.token2);
 

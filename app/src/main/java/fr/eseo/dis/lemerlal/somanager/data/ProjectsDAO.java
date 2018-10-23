@@ -11,6 +11,9 @@ public interface ProjectsDAO {
     @Query("SELECT * FROM projects")
     public List<Projects> findAllProjects();
 
+    @Query("SELECT * FROM projects WHERE confid =0")
+    public List<Projects> findProjectsNoConfid();
+
     @Query("SELECT * FROM projects WHERE id_project = :idProject")
     public Projects findNotesFromIdProjects(int idProject);
 }
