@@ -42,6 +42,8 @@ import javax.net.ssl.TrustManagerFactory;
 
 
 public class SoManagerActivity extends AppCompatActivity {
+    public static String USERS_EXTRA;
+    public static String TOKEN_EXTRA;
     private  EditText textuser;
     private EditText textmp;
     private Button connexion;
@@ -72,8 +74,13 @@ public class SoManagerActivity extends AppCompatActivity {
                                 try {
                                     String resultat = s.getString("result");
                                     if(resultat.equals("OK")){
+                                        String token =s.getString("token");
                                         Log.e("RESULT", String.valueOf(s));
                                         Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
+                                        Bundle extras = new Bundle();
+                                        extras.putString(TOKEN_EXTRA, token);
+                                        extras.putString(USERS_EXTRA,textuser.getText().toString());
+                                        intent.putExtras(extras);
                                         startActivity(intent);
                                     }else if(resultat.equals("KO")){
                                         erreurConnexion.setText("Erreur Connexion");

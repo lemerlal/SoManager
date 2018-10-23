@@ -5,13 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SoManagerActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="158dp">
+        >
+
+        <TextView
+            android:id="@+id/erreur_connexion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
 
 
         <EditText
@@ -21,27 +26,21 @@
             android:hint="user"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/edit_mp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_mp"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="58dp" />
+    <EditText
+        android:id="@+id/edit_mp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_mp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="58dp" />
 
         <Button
-            android:id="@+id/button_connexion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Connexion" />
-
-        <TextView
-            android:id="@+id/erreur_connexion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
+            android:id="@+id/button_connexion"
+            android:text="Connexion"/>
 
 
     </LinearLayout>
