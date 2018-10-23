@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import fr.eseo.dis.lemerlal.somanager.JuriesActivity;
 import fr.eseo.dis.lemerlal.somanager.R;
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 
@@ -17,9 +18,8 @@ public class ProjectsJuriesAdapter extends RecyclerView.Adapter<ProjectsJuriesAd
 
     private Projects projectsJuries;
 
-    public ProjectsJuriesAdapter(Context context, int idFilm){
+    public ProjectsJuriesAdapter(Context context){
         this.context = context;
-        projectsJuries = null;
     }
 
     public int getItemCount(){

@@ -1,6 +1,7 @@
 package fr.eseo.dis.lemerlal.somanager;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,4 +37,9 @@ public class JuriesActivity extends AppCompatActivity {
         juriesAdapter.setJuries(SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().findAllJuries());
     }
 
+    public void clickJuriesCard(Juries jury) {
+        Intent intent = new Intent(this, JuriesDetailsActivity.class);
+        intent.putExtra(JURIES_EXTRA, jury);
+        startActivity(intent);
+    }
 }

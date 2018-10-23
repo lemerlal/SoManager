@@ -60,7 +60,7 @@ public class PFEDetailsActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(llm);
-        studentsAdapter = new StudentsAdapter(this,clickedProject);
+        studentsAdapter = new StudentsAdapter(this);
         recycler.setAdapter(studentsAdapter);
         loadProjectDetails();
     }
