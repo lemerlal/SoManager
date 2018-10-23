@@ -1,6 +1,7 @@
 package fr.eseo.dis.lemerlal.somanager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,8 +30,6 @@ public class MenuActivity extends AppCompatActivity {
 
     private String token;
     private String user;
-    private TextView textUser;
-    private TextView textToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,17 +62,12 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        textUser = findViewById(R.id.token);
-        textToken = findViewById(R.id.token2);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        token =  pref.getString("token", null);
+        user =  pref.getString("username", null);
+        Log.e("TOKEN", token);
 
-        //Intent intent = getIntent();
-        Bundle extras = getIntent().getExtras();
-        token = extras.getString(TOKEN_EXTRA);
-        user =  extras.getString(USERS_EXTRA);
-        textUser.setText(user);
-        textToken.setText(token);
-
-        String url ="https://192.168.4.248/pfe/webservice.php?q=MYINF&user=jpo&token="+token;
+        String url ="https://192.168.4.248/pfe/webservice.php?q=MYINF&user="+user+"&token="+token;
         WebServiceRequest webServiceRequest =new WebServiceRequest(MenuActivity.this);
         SSLSocketFactory certificat =webServiceRequest.getSocketFactory();
 
@@ -91,12 +85,6 @@ public class MenuActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = new JSONObject(resultat);
                             String resultat2= jsonObject1.getString("idRole");
                             Log.e("RESULzzed", String.valueOf(resultat2));
-
-                            if(resultat2.equals("4")){
-                                Log.e("RESULTd$odffd", String.valueOf(s));
-                            }else{
-                                Log.e("RESzed", String.valueOf(s));
-                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

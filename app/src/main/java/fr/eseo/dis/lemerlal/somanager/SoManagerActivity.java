@@ -1,6 +1,7 @@
 package fr.eseo.dis.lemerlal.somanager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -44,6 +47,7 @@ import javax.net.ssl.TrustManagerFactory;
 public class SoManagerActivity extends AppCompatActivity {
     public static String USERS_EXTRA;
     public static String TOKEN_EXTRA;
+
     private  EditText textuser;
     private EditText textmp;
     private Button connexion;
@@ -76,11 +80,15 @@ public class SoManagerActivity extends AppCompatActivity {
                                     if(resultat.equals("OK")){
                                         String token =s.getString("token");
                                         Log.e("RESULT", String.valueOf(s));
+
+                                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("username", textuser.getText().toString());
+                                        editor.putString("token", token);
+                                        editor.commit();
+
                                         Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
-                                        Bundle extras = new Bundle();
-                                        extras.putString(TOKEN_EXTRA, token);
-                                        extras.putString(USERS_EXTRA,textuser.getText().toString());
-                                        intent.putExtras(extras);
+
                                         startActivity(intent);
                                     }else if(resultat.equals("KO")){
                                         erreurConnexion.setText("Erreur Connexion");

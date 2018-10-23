@@ -10,17 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/token"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="tiugiugui" />
-
-        <TextView
-            android:id="@+id/token2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="uiguihoi" />
 
         <Button
             android:id="@+id/pfe_button"
