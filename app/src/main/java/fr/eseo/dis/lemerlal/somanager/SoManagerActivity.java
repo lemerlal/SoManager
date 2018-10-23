@@ -34,8 +34,6 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -47,11 +45,12 @@ import javax.net.ssl.TrustManagerFactory;
 public class SoManagerActivity extends AppCompatActivity {
     public static String USERS_EXTRA;
     public static String TOKEN_EXTRA;
-
     private  EditText textuser;
     private EditText textmp;
     private Button connexion;
     private TextView erreurConnexion;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,16 +79,14 @@ public class SoManagerActivity extends AppCompatActivity {
                                     if(resultat.equals("OK")){
                                         String token =s.getString("token");
                                         Log.e("RESULT", String.valueOf(s));
-
                                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                                         SharedPreferences.Editor editor = pref.edit();
                                         editor.putString("username", textuser.getText().toString());
                                         editor.putString("token", token);
-                                        editor.commit();
-
-                                        Intent intent = new Intent(SoManagerActivity.this, MenuActivity.class);
-
+                                        editor.commit(); // commit changes
+                                        intent = new Intent(SoManagerActivity.this, MenuActivity.class);
                                         startActivity(intent);
+
                                     }else if(resultat.equals("KO")){
                                         erreurConnexion.setText("Erreur Connexion");
                                         Log.e("ErreurConnexion", String.valueOf(s));

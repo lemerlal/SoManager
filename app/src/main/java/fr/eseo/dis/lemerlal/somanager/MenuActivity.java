@@ -29,7 +29,9 @@ import static fr.eseo.dis.lemerlal.somanager.SoManagerActivity.USERS_EXTRA;
 public class MenuActivity extends AppCompatActivity {
 
     private String token;
-    private String user;
+    private String username;
+    private TextView textUser;
+    private TextView textToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +64,12 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        token =  pref.getString("token", null);
-        user =  pref.getString("username", null);
-        Log.e("TOKEN", token);
+        SharedPreferences pref;
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        username = pref.getString("username", null);
+        token = pref.getString("token", null);
 
-        String url ="https://192.168.4.248/pfe/webservice.php?q=MYINF&user="+user+"&token="+token;
+        String url ="https://192.168.4.248/pfe/webservice.php?q=MYINF&user="+username+"&token="+token;
         WebServiceRequest webServiceRequest =new WebServiceRequest(MenuActivity.this);
         SSLSocketFactory certificat =webServiceRequest.getSocketFactory();
 
@@ -85,6 +87,10 @@ public class MenuActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = new JSONObject(resultat);
                             String resultat2= jsonObject1.getString("idRole");
                             Log.e("RESULzzed", String.valueOf(resultat2));
+                            Intent intent = new Intent(MenuActivity.this, JuriesActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString(TOKEN_EXTRA, token);
+                            intent.putExtras(extras);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
