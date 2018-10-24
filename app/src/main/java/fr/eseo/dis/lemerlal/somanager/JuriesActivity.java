@@ -70,17 +70,33 @@ public class JuriesActivity extends AppCompatActivity {
                     public void onResponse(JSONObject s) {
                         Log.e("RESULT", String.valueOf(s));
                         try {
-                            JSONObject jsonJuries = s.getJSONObject("juries");
+                            JSONArray jsonJuries = s.getJSONArray("juries");
+                            Log.e("RESULT2", String.valueOf(jsonJuries));
                             for (int i=0; i<jsonJuries.length();i++){
-                                int id =jsonJuries.getInt("id");
-                                String date = jsonJuries.getString("date");
-                                int projectId = jsonJuries.getInt("projectId");
+                                Log.e("RESULT3", String.valueOf(jsonJuries));
+                                JSONObject jsonObjectJuries = jsonJuries.getJSONObject(i);
+                                Log.e("RESULT4", String.valueOf(jsonObjectJuries));
+                                int id =jsonObjectJuries.getInt("idJury");
+                                String date = jsonObjectJuries.getString("date");
+                                Log.e("RESULT4", String.valueOf(id));
+                                /**
+                                JSONObject jsonInfo = jsonObjectJuries.getJSONObject("info");
+                                JSONArray jsonProject = jsonInfo.getJSONArray("projects");
+                                Log.e("RESULT5", String.valueOf(jsonInfo));
+                                Log.e("RESULT6", String.valueOf(jsonProject));
+                                for (int j=0; j<jsonProject.length();j++){
+                                    JSONObject jsonObjectProject = jsonProject.getJSONObject(j);
+                                    int projectId = jsonObjectProject.getInt("projectId");
 
-                                Juries juries = new Juries(id,date,projectId);
-                                SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().updateMyJuries(juries);
+                                   Juries juries = new Juries(id,date,projectId);
+                                   SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().updateMyJuries(juries);
+                                }
+                                 */
+                                Juries juries = new Juries(id,date);
+                                if(SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().findJuriesFromId(id)== null){
+                                    SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().updateMyJuries(juries);
+                                }
                             }
-                            juriesAdapter.setJuries(SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().findAllJuries());
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -93,6 +109,8 @@ public class JuriesActivity extends AppCompatActivity {
                         Log.e("RESULTERROR",volleyError.getMessage()); }
                 } );
         rq.add(s);
+
+        juriesAdapter.setJuries(SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().findAllJuries());
 
     }
 

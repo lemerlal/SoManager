@@ -87,10 +87,6 @@ public class MenuActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = new JSONObject(resultat);
                             String resultat2= jsonObject1.getString("idRole");
                             Log.e("RESULzzed", String.valueOf(resultat2));
-                            Intent intent = new Intent(MenuActivity.this, JuriesActivity.class);
-                            Bundle extras = new Bundle();
-                            extras.putString(TOKEN_EXTRA, token);
-                            intent.putExtras(extras);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

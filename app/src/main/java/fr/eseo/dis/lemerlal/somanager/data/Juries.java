@@ -32,21 +32,16 @@ public class Juries implements Parcelable {
         @NonNull
         private String date;
 
-        @NonNull
-        private int juryProjectId;
 
-
-    public Juries(int juryID, @NonNull String date, @NonNull int juryProjectId) {
+    public Juries(int juryID, @NonNull String date) {
         this.juryID = juryID;
         this.date = date;
-        this.juryProjectId = juryProjectId;
     }
 
     @Ignore
     public Juries(Parcel in){
         this.juryID = in.readInt();
         this.date = in.readString();
-        this.juryProjectId = in.readInt();
     }
 
     public int getJuryID() {
@@ -58,12 +53,6 @@ public class Juries implements Parcelable {
         return date;
     }
 
-    @NonNull
-    public int getJuryProjectId() {
-        return juryProjectId;
-    }
-
-
     public void setJuryID(int juryID) {
         this.juryID = juryID;
     }
@@ -72,9 +61,6 @@ public class Juries implements Parcelable {
         this.date = date;
     }
 
-    public void setJuryProjectId(@NonNull int juryProjectId) {
-        this.juryProjectId = juryProjectId;
-    }
 
     @Ignore
     public int describeContents(){
@@ -85,7 +71,6 @@ public class Juries implements Parcelable {
     public void writeToParcel(Parcel dest, int flags){
         dest.writeInt(this.juryID);
         dest.writeString(this.date);
-        dest.writeInt(this.juryProjectId);
     }
 
 }
