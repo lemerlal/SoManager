@@ -56,6 +56,7 @@ public class JuriesDetailsActivity extends AppCompatActivity {
         int indiceProject = 0;
         List<Projects> projects = SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao()
                 .findAllProjects();
+        /**
         while(indiceProject < projects.size() && project == null ){
             if(projects.get(indiceProject).getProjectID() == jury.getJuryProjectId()){
                 project=projects.get(indiceProject);
@@ -63,6 +64,7 @@ public class JuriesDetailsActivity extends AppCompatActivity {
                 indiceProject++;
             }
         }
+         */
         projectsAdapter.setJuryProject(project);
         DecimalFormat df = new DecimalFormat("0.0");
         projectsAdapter.notifyDataSetChanged();
