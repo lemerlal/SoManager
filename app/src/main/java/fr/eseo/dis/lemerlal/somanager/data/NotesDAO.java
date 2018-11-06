@@ -14,7 +14,7 @@ public interface NotesDAO {
     public List<Notes> findAllNotes();
 
     @Query("SELECT * FROM notes WHERE id_user = :idUser")
-    public Notes findNotesFromIdUsers(int idUser);
+    public List<Notes> findNotesFromIdUsers(int idUser);
 
     @Query("UPDATE Notes SET myNote = :new_notes  WHERE id_user = :idUser")
     public void updateMyNote(double new_notes,int idUser);

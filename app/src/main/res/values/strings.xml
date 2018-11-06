@@ -7,4 +7,5 @@
     <string name="juries_button">JURIES</string>
     <string name="notes_button">Notes</string>
     <string name="pfe_random_button">Random</string>
+    <string name="my_pfe_button">my_pfe_button</string>
 </resources>

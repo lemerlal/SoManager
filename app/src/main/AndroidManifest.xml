@@ -21,9 +21,13 @@
         <activity android:name=".MenuActivity">
         </activity>
         <activity android:name=".PFEActivity"></activity>
+        <activity android:name=".MyPFEActivity"></activity>
         <activity android:name=".PFEDetailsActivity"></activity>
+        <activity android:name=".MyPFEDetailsActivity"></activity>
         <activity android:name=".JuriesActivity"></activity>
         <activity android:name=".JuriesDetailsActivity"></activity>
+        <activity android:name=".MyJuriesActivity"></activity>
+        <activity android:name=".MyJuriesDetailsActivity"></activity>
         <activity android:name=".PosterActivity"></activity>
         <activity android:name=".NotesActivity"></activity>
         <activity android:name=".NotesDetailsActivity"></activity>

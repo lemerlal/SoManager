@@ -20,7 +20,7 @@ import fr.eseo.dis.lemerlal.somanager.data.Students;
 import fr.eseo.dis.lemerlal.somanager.data.User;
 import fr.eseo.dis.lemerlal.somanager.data.adapters.StudentsAdapter;
 
-public class PFEDetailsActivity extends AppCompatActivity {
+public class MyPFEDetailsActivity extends AppCompatActivity {
 
     private TextView title;
     private TextView confid;
@@ -49,7 +49,7 @@ public class PFEDetailsActivity extends AppCompatActivity {
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PFEDetailsActivity.this, PosterActivity.class);
+                Intent intent = new Intent(MyPFEDetailsActivity.this, PosterActivity.class);
                 intent.putExtra(PFEActivity.PROJECT_EXTRA, project);
                 startActivity(intent);
             }
@@ -68,7 +68,7 @@ public class PFEDetailsActivity extends AppCompatActivity {
     private void loadProjectDetails(){
         User supervisorProject = null;
         int indiceSupervisor = 0;
-        List<User> user = SoManagerDatabase.getDatabase(PFEDetailsActivity.this).usersDao()
+        List<User> user = SoManagerDatabase.getDatabase(MyPFEDetailsActivity.this).usersDao()
                 .findAllUsers();
         /*
         while(indiceSupervisor < user.size() && supervisorProject == null){
@@ -82,7 +82,7 @@ public class PFEDetailsActivity extends AppCompatActivity {
 */
 
         List<Students> usersStudents = new ArrayList<>();
-        for(Students students : SoManagerDatabase.getDatabase(PFEDetailsActivity.this).studentsDao().findAllStudents()){
+        for(Students students : SoManagerDatabase.getDatabase(MyPFEDetailsActivity.this).studentsDao().findAllStudents()){
             if(students.getStudentID() == project.getProjectID()) {
                 usersStudents.add(students);
             }
