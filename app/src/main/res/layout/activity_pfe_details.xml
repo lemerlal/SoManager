@@ -69,8 +69,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/details_students"
                 android:layout_width="match_parent"
-                android:background="@color/colorSecondaryLight"
-                android:layout_height="100dp" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondaryLight" />
             <TextView
                 android:id="@+id/tv_details_description_label"
                 android:layout_width="match_parent"

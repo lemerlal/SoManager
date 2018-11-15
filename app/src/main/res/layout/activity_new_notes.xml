@@ -16,9 +16,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/name_hint"
             android:inputType="text" />
+
         <Button
             android:id="@+id/give_new_notes_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pfe_button" />
 
