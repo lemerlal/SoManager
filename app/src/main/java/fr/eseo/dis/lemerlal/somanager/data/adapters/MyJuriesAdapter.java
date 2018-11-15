@@ -59,6 +59,12 @@ public class MyJuriesAdapter extends RecyclerView.Adapter<MyJuriesAdapter.Juries
             public void onClick(View v) {
             }
         });
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.clickJuriesCard(jury);
+            }
+        });
     }
 
     class JuriesViewHolder extends RecyclerView.ViewHolder{

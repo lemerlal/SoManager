@@ -18,8 +18,8 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
     };
 
     private static String[] INSERT_Students = new String[]{
-            "INSERT INTO students VALUES(1,'alexandre','lemerle');",
-            "INSERT INTO students VALUES(2,'thomas','dfdff');",
+            //"INSERT INTO students VALUES(1,'alexandre','lemerle');",
+            //"INSERT INTO students VALUES(2,'thomas','dfdff');",
     };
 
     private static String[] INSERT_Juries = new String[] {
@@ -36,8 +36,8 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
     };
 
     private static String[] INSERT_ROLES = new String[] {
-            "INSERT INTO role VALUES(0,1);",
-            "INSERT INTO role VALUES(1,2);",
+            //"INSERT INTO role VALUES(0,1);",
+            //"INSERT INTO role VALUES(1,2);",
 
     };
 

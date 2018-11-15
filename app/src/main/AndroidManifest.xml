@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -26,8 +26,10 @@
         <activity android:name=".MyPFEDetailsActivity"></activity>
         <activity android:name=".JuriesActivity"></activity>
         <activity android:name=".JuriesDetailsActivity"></activity>
+        <activity android:name=".ProjetJuryDetailsActivity"></activity>
         <activity android:name=".MyJuriesActivity"></activity>
         <activity android:name=".MyJuriesDetailsActivity"></activity>
+        <activity android:name=".MyProjetJuryDetailsActivity"></activity>
         <activity android:name=".PosterActivity"></activity>
         <activity android:name=".NotesActivity"></activity>
         <activity android:name=".NotesDetailsActivity"></activity>

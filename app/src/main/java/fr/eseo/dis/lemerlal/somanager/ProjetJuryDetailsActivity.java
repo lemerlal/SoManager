@@ -17,10 +17,9 @@ import java.util.List;
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
 import fr.eseo.dis.lemerlal.somanager.data.Students;
-import fr.eseo.dis.lemerlal.somanager.data.User;
 import fr.eseo.dis.lemerlal.somanager.data.adapters.StudentsAdapter;
 
-public class MyPFEDetailsActivity extends AppCompatActivity {
+public class ProjetJuryDetailsActivity extends AppCompatActivity {
 
     private TextView title;
     private TextView confid;
@@ -37,7 +36,7 @@ public class MyPFEDetailsActivity extends AppCompatActivity {
         int clickedProject = 0;
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-        project = (Projects) data.getParcelable(PFEActivity.PROJECT_EXTRA);
+        project = (Projects) data.getParcelable(JuriesDetailsActivity.PROJECT_EXTRA);
         title = findViewById(R.id.tv_details_title);
         confid = findViewById(R.id.tv_details_confid);
         description = findViewById(R.id.tv_details_description);
@@ -49,7 +48,7 @@ public class MyPFEDetailsActivity extends AppCompatActivity {
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPFEDetailsActivity.this, PosterActivity.class);
+                Intent intent = new Intent(ProjetJuryDetailsActivity.this, PosterActivity.class);
                 intent.putExtra(PFEActivity.PROJECT_EXTRA, project);
                 startActivity(intent);
             }
@@ -66,8 +65,9 @@ public class MyPFEDetailsActivity extends AppCompatActivity {
     }
 
     private void loadProjectDetails(){
+
         List<Students> usersStudents = new ArrayList<>();
-        for(Students students : SoManagerDatabase.getDatabase(MyPFEDetailsActivity.this).studentsDao().findAllStudents()){
+        for(Students students : SoManagerDatabase.getDatabase(ProjetJuryDetailsActivity.this).studentsDao().findAllStudents()){
             if(students.getStudentID() == project.getProjectID()) {
                 usersStudents.add(students);
             }

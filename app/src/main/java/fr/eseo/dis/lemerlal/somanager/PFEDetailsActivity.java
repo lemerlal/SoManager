@@ -66,20 +66,6 @@ public class PFEDetailsActivity extends AppCompatActivity {
     }
 
     private void loadProjectDetails(){
-        User supervisorProject = null;
-        int indiceSupervisor = 0;
-        List<User> user = SoManagerDatabase.getDatabase(PFEDetailsActivity.this).usersDao()
-                .findAllUsers();
-        /*
-        while(indiceSupervisor < user.size() && supervisorProject == null){
-            if(user.get(indiceSupervisor).getUserId() == project.getNameSupervisor()){
-                supervisorProject = user.get(indiceSupervisor);
-            }
-            else{
-                indiceSupervisor++;
-            }
-        }
-*/
 
         List<Students> usersStudents = new ArrayList<>();
         for(Students students : SoManagerDatabase.getDatabase(PFEDetailsActivity.this).studentsDao().findAllStudents()){
@@ -89,7 +75,7 @@ public class PFEDetailsActivity extends AppCompatActivity {
         }
 
         studentsAdapter.setRoles(usersStudents);
-        supervisor.setText(getString(R.string.supervisor_label) + supervisorProject.getSurename()+" "+supervisorProject.getForename());
+        supervisor.setText(project.getSurnameSupervisor()+" "+project.getForenameSupervisor());
         DecimalFormat df = new DecimalFormat("0.0");
         studentsAdapter.notifyDataSetChanged();
     }

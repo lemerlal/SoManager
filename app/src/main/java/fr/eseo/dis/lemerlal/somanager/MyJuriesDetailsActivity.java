@@ -10,20 +10,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eseo.dis.lemerlal.somanager.data.Juries;
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
+import fr.eseo.dis.lemerlal.somanager.data.adapters.MyProjectsJuriesAdapter;
 import fr.eseo.dis.lemerlal.somanager.data.adapters.ProjectsJuriesAdapter;
 
 public class MyJuriesDetailsActivity extends AppCompatActivity {
 
+    public static final String PROJECT_EXTRA = "project_extra";
     private TextView idJuries;
     private TextView date;
     private Juries jury;
     private Button notes;
-    private ProjectsJuriesAdapter projectsAdapter;
+    private MyProjectsJuriesAdapter projectsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,27 +45,25 @@ public class MyJuriesDetailsActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(llm);
-        projectsAdapter = new ProjectsJuriesAdapter(this);
-        recycler.setAdapter(projectsAdapter);
         loadJuriesDetails();
     }
 
     private void loadJuriesDetails(){
-        Projects project = null;
-        int indiceProject = 0;
-        List<Projects> projects = SoManagerDatabase.getDatabase(MyJuriesDetailsActivity.this).projectsDao()
-                .findAllProjects();
-        /**
-        while(indiceProject < projects.size() && project == null ){
-            if(projects.get(indiceProject).getProjectID() == jury.getJuryProjectId()){
-                project=projects.get(indiceProject);
-            } else{
-                indiceProject++;
+        List<Projects> projectsJuries = new ArrayList<>();
+        for(Projects projects : SoManagerDatabase.getDatabase(MyJuriesDetailsActivity.this).projectsDao().findAllProjects()){
+            if(projects.getJuryId() == jury.getJuryID()) {
+                projectsJuries.add(projects);
             }
         }
-         */
-        projectsAdapter.setJuryProject(project);
+
+        projectsAdapter.setProjects(projectsJuries);
         DecimalFormat df = new DecimalFormat("0.0");
         projectsAdapter.notifyDataSetChanged();
+    }
+
+    public void clickProjectCard(Projects project) {
+        Intent intent = new Intent(this, ProjetJuryDetailsActivity.class);
+        intent.putExtra(PROJECT_EXTRA, project);
+        startActivity(intent);
     }
 }

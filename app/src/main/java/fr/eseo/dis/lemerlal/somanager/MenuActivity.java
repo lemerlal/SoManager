@@ -31,6 +31,7 @@ import fr.eseo.dis.lemerlal.somanager.data.Juries;
 import fr.eseo.dis.lemerlal.somanager.data.Notes;
 import fr.eseo.dis.lemerlal.somanager.data.Projects;
 import fr.eseo.dis.lemerlal.somanager.data.SoManagerDatabase;
+import fr.eseo.dis.lemerlal.somanager.data.Students;
 
 import static fr.eseo.dis.lemerlal.somanager.SoManagerActivity.TOKEN_EXTRA;
 import static fr.eseo.dis.lemerlal.somanager.SoManagerActivity.USERS_EXTRA;
@@ -71,14 +72,10 @@ public class MenuActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject s) {
-                                Log.e("RESULT", String.valueOf(s));
                                 try {
                                     JSONArray jsonProject = s.getJSONArray("projects");
-                                    Log.e("RESULT2", String.valueOf(jsonProject));
                                     for (int i=0; i<jsonProject.length();i++){
-                                        Log.e("RESULT3", String.valueOf(jsonProject));
                                         JSONObject jsonObjectProject = jsonProject.getJSONObject(i);
-                                        Log.e("RESULT4", String.valueOf(jsonObjectProject));
                                         int id =jsonObjectProject.getInt("projectId");
                                         String title =jsonObjectProject.getString("title");
                                         String description =jsonObjectProject.getString("descrip");
@@ -86,10 +83,10 @@ public class MenuActivity extends AppCompatActivity {
                                         int confid = jsonObjectProject.getInt("confid");
 
                                         JSONObject jsonObjectSupervisor = jsonObjectProject.getJSONObject("supervisor");
-                                        Log.e("RESULT5", String.valueOf(jsonObjectSupervisor));
-                                        String nameS = jsonObjectSupervisor.getString("forename");
+                                        String forename = jsonObjectSupervisor.getString("forename");
+                                        String surname = jsonObjectSupervisor.getString("surname");
 
-                                        Projects projects = new Projects(id,title,description,poster,confid,nameS);
+                                        Projects projects = new Projects(id,title,description,poster,confid,forename,surname);
                                         idPFE.add(id);
                                         for (int j=0 ; j<= idPFE.size();j++) {
                                             if (SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0) {
@@ -144,30 +141,29 @@ public class MenuActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject s) {
-                                Log.e("RESULT", String.valueOf(s));
                                 try {
                                     JSONArray jsonJuries = s.getJSONArray("juries");
-                                    Log.e("RESULT2", String.valueOf(jsonJuries));
                                     for (int i=0; i<jsonJuries.length();i++){
-                                        Log.e("RESULT3", String.valueOf(jsonJuries));
                                         JSONObject jsonObjectJuries = jsonJuries.getJSONObject(i);
-                                        Log.e("RESULT4", String.valueOf(jsonObjectJuries));
                                         int id =jsonObjectJuries.getInt("idJury");
                                         String date = jsonObjectJuries.getString("date");
-                                        Log.e("RESULT4", String.valueOf(id));
-                                        /**
-                                         JSONObject jsonInfo = jsonObjectJuries.getJSONObject("info");
-                                         JSONArray jsonProject = jsonInfo.getJSONArray("projects");
-                                         Log.e("RESULT5", String.valueOf(jsonInfo));
-                                         Log.e("RESULT6", String.valueOf(jsonProject));
-                                         for (int j=0; j<jsonProject.length();j++){
-                                         JSONObject jsonObjectProject = jsonProject.getJSONObject(j);
-                                         int projectId = jsonObjectProject.getInt("projectId");
+                                        JSONObject jsonInfo = jsonObjectJuries.getJSONObject("info");
+                                        JSONArray jsonProject = jsonInfo.getJSONArray("projects");
+                                        for (int j=0; j<jsonProject.length();j++){
+                                            JSONObject jsonObjectProject = jsonProject.getJSONObject(j);
+                                            int projectId = jsonObjectProject.getInt("projectId");
+                                            String title = jsonObjectProject.getString("title");
+                                            Boolean poster = jsonObjectProject.getBoolean("poster");
+                                            int confid = jsonObjectProject.getInt("confid");
+                                            JSONObject jsonSupervisor = jsonObjectProject.getJSONObject("supervisor");
+                                            String forenameS = jsonSupervisor.getString("forename");
+                                            String surnameS = jsonSupervisor.getString("surname");
+                                            Projects project = new Projects(projectId,title,poster,confid,forenameS,surnameS,id);
+                                            if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(project);
 
-                                         Juries juries = new Juries(id,date,projectId);
-                                         SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().updateMyJuries(juries);
-                                         }
-                                         */
+                                            }
+                                        }
                                         Juries juries = new Juries(id,date);
                                         idJurie.add(id);
                                         for (int j=0 ; j<= idJurie.size();j++){
@@ -222,14 +218,10 @@ public class MenuActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject s) {
-                                Log.e("RESULT", String.valueOf(s));
                                 try {
                                     JSONArray jsonProject = s.getJSONArray("projects");
-                                    Log.e("RESULT2", String.valueOf(jsonProject));
                                     for (int i=0; i<jsonProject.length();i++){
-                                        Log.e("RESULT3", String.valueOf(jsonProject));
                                         JSONObject jsonObjectProject = jsonProject.getJSONObject(i);
-                                        Log.e("RESULT4", String.valueOf(jsonObjectProject));
                                         int id =jsonObjectProject.getInt("projectId");
                                         String title =jsonObjectProject.getString("title");
                                         String description =jsonObjectProject.getString("descrip");
@@ -237,10 +229,23 @@ public class MenuActivity extends AppCompatActivity {
                                         int confid = jsonObjectProject.getInt("confid");
 
                                         JSONObject jsonObjectSupervisor = jsonObjectProject.getJSONObject("supervisor");
-                                        Log.e("RESULT5", String.valueOf(jsonObjectSupervisor));
-                                        String nameS = jsonObjectSupervisor.getString("forename");
+                                        String forename = jsonObjectSupervisor.getString("forename");
+                                        String surname = jsonObjectSupervisor.getString("surname");
 
-                                        Projects projects = new Projects(id,title,description,poster,confid,nameS);
+                                        JSONArray jsonStudents = jsonObjectProject.getJSONArray("students");
+                                        for (int j=0; j<jsonStudents.length();j++){
+                                            JSONObject jsonObjectStudent= jsonStudents.getJSONObject(j);
+                                            int studentId = jsonObjectStudent.getInt("userId");
+                                            String forenameS = jsonObjectStudent.getString("forename");
+                                            String surnameS = jsonObjectStudent.getString("surname");
+                                            Students student = new Students(studentId,forenameS,surnameS);
+                                            if(SoManagerDatabase.getDatabase(MenuActivity.this).studentsDao().findNotesFromIdStudent(studentId)==null){
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).studentsDao().updateMyStudents(student);
+
+                                            }
+                                        }
+
+                                        Projects projects = new Projects(id,title,description,poster,confid,forename,surname);
                                         if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
                                             SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(projects);
 
@@ -284,30 +289,29 @@ public class MenuActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject s) {
-                                Log.e("RESULT", String.valueOf(s));
                                 try {
                                     JSONArray jsonJuries = s.getJSONArray("juries");
-                                    Log.e("RESULT2", String.valueOf(jsonJuries));
                                     for (int i=0; i<jsonJuries.length();i++){
-                                        Log.e("RESULT3", String.valueOf(jsonJuries));
                                         JSONObject jsonObjectJuries = jsonJuries.getJSONObject(i);
-                                        Log.e("RESULT4", String.valueOf(jsonObjectJuries));
                                         int id =jsonObjectJuries.getInt("idJury");
                                         String date = jsonObjectJuries.getString("date");
-                                        Log.e("RESULT4", String.valueOf(id));
-                                        /**
-                                         JSONObject jsonInfo = jsonObjectJuries.getJSONObject("info");
-                                         JSONArray jsonProject = jsonInfo.getJSONArray("projects");
-                                         Log.e("RESULT5", String.valueOf(jsonInfo));
-                                         Log.e("RESULT6", String.valueOf(jsonProject));
-                                         for (int j=0; j<jsonProject.length();j++){
-                                         JSONObject jsonObjectProject = jsonProject.getJSONObject(j);
-                                         int projectId = jsonObjectProject.getInt("projectId");
+                                        JSONObject jsonInfo = jsonObjectJuries.getJSONObject("info");
+                                        JSONArray jsonProject = jsonInfo.getJSONArray("projects");
+                                        for (int j=0; j<jsonProject.length();j++){
+                                            JSONObject jsonObjectProject = jsonProject.getJSONObject(j);
+                                            int projectId = jsonObjectProject.getInt("projectId");
+                                            String title = jsonObjectProject.getString("title");
+                                            Boolean poster = jsonObjectProject.getBoolean("poster");
+                                            int confid = jsonObjectProject.getInt("confid");
+                                            JSONObject jsonSupervisor = jsonObjectProject.getJSONObject("supervisor");
+                                            String forenameS = jsonSupervisor.getString("forename");
+                                            String surnameS = jsonSupervisor.getString("surname");
+                                            Projects project = new Projects(projectId,title,poster,confid,forenameS,surnameS,id);
+                                            if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(project);
 
-                                         Juries juries = new Juries(id,date,projectId);
-                                         SoManagerDatabase.getDatabase(JuriesActivity.this).juriesDao().updateMyJuries(juries);
-                                         }
-                                         */
+                                            }
+                                        }
                                         Juries juries = new Juries(id,date);
                                         if(SoManagerDatabase.getDatabase(MenuActivity.this).juriesDao().findJuriesFromId(id).size()== 0){
                                             SoManagerDatabase.getDatabase(MenuActivity.this).juriesDao().updateMyJuries(juries);
@@ -359,19 +363,19 @@ public class MenuActivity extends AppCompatActivity {
                                         JSONObject jsonObjectProject = jsonProject.getJSONObject(i);
                                         int id =jsonObjectProject.getInt("projectId");
                                         idPFENote.add(id);
-                                        Log.e("RESULNOOOOOOOOOOOTEEEEEEEE", String.valueOf(idPFENote.size()));
+                                        Log.e("RESULNOOTEEEEEEEE", String.valueOf(idPFENote.size()));
                                     }
-                                    Log.e("RESULNOOOOOOOOOOOTEEEEEEEE3", String.valueOf(idPFENote.size()));
+                                    Log.e("RESULEEEEEEEE3", String.valueOf(idPFENote.size()));
                                     for (int j=0 ; j<idPFENote.size()  ;j++) {
 
                                         String urlNote = "https://192.168.4.248/pfe/webservice.php?q=NOTES&user=" + username +"&proj="+ idPFENote.get(j) +"&token=" + token;
                                         RequestQueue rqNote = Volley.newRequestQueue(MenuActivity.this, new HurlStack(null, certificat));
-                                        Log.e("RESULNOOOOOOOOOOOTEEEEEEEE3", urlNote);
+                                        Log.e("RESULNEEEEE3", urlNote);
                                         JsonObjectRequest sNote = new JsonObjectRequest(Request.Method.GET, urlNote, null,
                                                 new Response.Listener<JSONObject>() {
                                                     @Override
                                                     public void onResponse(JSONObject sNote) {
-                                                        Log.e("RESULTNNNNNNNNNNOOOOOOOOOOTTTTTTTTEEEEEE", String.valueOf(sNote));
+                                                        Log.e("RESULTNNNNEEEEE", String.valueOf(sNote));
                                                         try {
                                                             JSONArray jsonNote = sNote.getJSONArray("notes");
                                                             Log.e("RESULT2", String.valueOf(jsonNote));
@@ -425,7 +429,7 @@ public class MenuActivity extends AppCompatActivity {
                         } );
                 rq.add(s);
 
-                Log.e("RESULNOOOOOOOOOOOTEEEEEEEE2", String.valueOf(idPFENote.size()));
+                Log.e("RESULNEEEE2", String.valueOf(idPFENote.size()));
 
                 Gson gson = new Gson();
                 String jsonText = gson.toJson(idNote);
@@ -457,14 +461,11 @@ public class MenuActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject s) {
-                        Log.e("RESULT", String.valueOf(s));
                         try {
                             JSONArray jsonObject = s.getJSONArray("info");
-                            Log.e("RESULzzed", String.valueOf(jsonObject));
                             String resultat = jsonObject.getString(Integer.parseInt("0"));
                             JSONObject jsonObject1 = new JSONObject(resultat);
                             String resultat2= jsonObject1.getString("idRole");
-                            Log.e("RESULzzed", String.valueOf(resultat2));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

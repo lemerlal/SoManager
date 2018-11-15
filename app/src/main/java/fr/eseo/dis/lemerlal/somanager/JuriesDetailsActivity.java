@@ -23,6 +23,7 @@ import fr.eseo.dis.lemerlal.somanager.data.adapters.ProjectsJuriesAdapter;
 
 public class JuriesDetailsActivity extends AppCompatActivity {
 
+    public static final String PROJECT_EXTRA = "project_extra";
     private TextView idJuries;
     private TextView date;
     private Juries jury;
@@ -52,21 +53,21 @@ public class JuriesDetailsActivity extends AppCompatActivity {
     }
 
     private void loadJuriesDetails(){
-        Projects project = null;
-        int indiceProject = 0;
-        List<Projects> projects = SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao()
-                .findAllProjects();
-        /**
-        while(indiceProject < projects.size() && project == null ){
-            if(projects.get(indiceProject).getProjectID() == jury.getJuryProjectId()){
-                project=projects.get(indiceProject);
-            } else{
-                indiceProject++;
+        List<Projects> projectsJuries = new ArrayList<>();
+        for(Projects projects : SoManagerDatabase.getDatabase(JuriesDetailsActivity.this).projectsDao().findAllProjects()){
+            if(projects.getJuryId() == jury.getJuryID()) {
+                projectsJuries.add(projects);
             }
         }
-         */
-        projectsAdapter.setJuryProject(project);
+
+        projectsAdapter.setProjects(projectsJuries);
         DecimalFormat df = new DecimalFormat("0.0");
         projectsAdapter.notifyDataSetChanged();
+    }
+
+    public void clickProjectCard(Projects project) {
+        Intent intent = new Intent(this, ProjetJuryDetailsActivity.class);
+        intent.putExtra(PROJECT_EXTRA, project);
+        startActivity(intent);
     }
 }

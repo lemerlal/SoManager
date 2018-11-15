@@ -1,10 +1,5 @@
 package fr.eseo.dis.lemerlal.somanager.data.adapters;
 
-import fr.eseo.dis.lemerlal.somanager.JuriesDetailsActivity;
-import fr.eseo.dis.lemerlal.somanager.PFEActivity;
-import fr.eseo.dis.lemerlal.somanager.R;
-import fr.eseo.dis.lemerlal.somanager.data.Projects;
-
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,15 +11,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectsJuriesAdapter extends RecyclerView.Adapter<ProjectsJuriesAdapter.PFEViewHolder>{
+import fr.eseo.dis.lemerlal.somanager.JuriesDetailsActivity;
+import fr.eseo.dis.lemerlal.somanager.MyJuriesDetailsActivity;
+import fr.eseo.dis.lemerlal.somanager.PFEActivity;
+import fr.eseo.dis.lemerlal.somanager.R;
+import fr.eseo.dis.lemerlal.somanager.data.Projects;
 
-    private JuriesDetailsActivity activity;
+public class MyProjectsJuriesAdapter extends RecyclerView.Adapter<MyProjectsJuriesAdapter.PFEViewHolder>{
+
+    private MyJuriesDetailsActivity activity;
 
     private List<Projects> projects;
 
     private List<Integer> positionsExpanded;
 
-    public ProjectsJuriesAdapter(JuriesDetailsActivity pfeActivity){
+    public MyProjectsJuriesAdapter(MyJuriesDetailsActivity pfeActivity){
         this.activity = pfeActivity;
         setProjects(new ArrayList<Projects>());
         this.positionsExpanded=new ArrayList<Integer>();

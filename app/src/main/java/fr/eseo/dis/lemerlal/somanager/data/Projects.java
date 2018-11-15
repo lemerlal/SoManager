@@ -42,17 +42,45 @@ public class Projects implements Parcelable{
     private int confid;
 
     @NonNull
-    private String nameSupervisor;
+    private String forenameSupervisor;
 
+    @NonNull
+    private String surnameSupervisor;
 
+    private int juryId;
 
-    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull String nameSupervisor) {
+    @Ignore
+    public Projects(int projectID, @NonNull String title, @NonNull Boolean poster, @NonNull int confid, @NonNull String forenameSupervisor, @NonNull String surnameSupervisor, int juryId) {
+        this.projectID = projectID;
+        this.title = title;
+        this.descrip = "";
+        this.poster = poster;
+        this.confid = confid;
+        this.forenameSupervisor = forenameSupervisor;
+        this.surnameSupervisor = surnameSupervisor;
+        this.juryId = juryId;
+    }
+
+    @Ignore
+    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull String forenameSupervisor, @NonNull String surnameSupervisor) {
         this.projectID = projectID;
         this.title = title;
         this.descrip = descrip;
         this.poster = poster;
         this.confid = confid;
-        this.nameSupervisor = nameSupervisor;
+        this.forenameSupervisor = forenameSupervisor;
+        this.surnameSupervisor = surnameSupervisor;
+    }
+
+    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull String forenameSupervisor, @NonNull String surnameSupervisor, int juryId) {
+        this.projectID = projectID;
+        this.title = title;
+        this.descrip = descrip;
+        this.poster = poster;
+        this.confid = confid;
+        this.forenameSupervisor = forenameSupervisor;
+        this.surnameSupervisor = surnameSupervisor;
+        this.juryId = juryId;
     }
 
     @Ignore
@@ -62,7 +90,9 @@ public class Projects implements Parcelable{
         this.descrip = in.readString();
         this.poster = (in.readInt() == 0) ? false : true;
         this.confid = in.readInt();
-        this.nameSupervisor = in.readString();
+        this.forenameSupervisor = in.readString();
+        this.surnameSupervisor = in.readString();
+        this.juryId = in.readInt();
     }
 
 
@@ -113,12 +143,29 @@ public class Projects implements Parcelable{
 
 
     @NonNull
-    public String getNameSupervisor() {
-        return nameSupervisor;
+    public String getForenameSupervisor() {
+        return forenameSupervisor;
     }
 
-    public void setNameSupervisor(@NonNull String nameSupervisor) {
-        this.nameSupervisor = nameSupervisor;
+    public void setForenameSupervisor(@NonNull String forenameSupervisor) {
+        this.forenameSupervisor = forenameSupervisor;
+    }
+
+    @NonNull
+    public String getSurnameSupervisor() {
+        return surnameSupervisor;
+    }
+
+    public void setSurnameSupervisor(@NonNull String surnameSupervisor) {
+        this.surnameSupervisor = surnameSupervisor;
+    }
+
+    public int getJuryId() {
+        return juryId;
+    }
+
+    public void setJuryId(@NonNull int juryId) {
+        this.juryId = juryId;
     }
 
     @Ignore
@@ -133,6 +180,8 @@ public class Projects implements Parcelable{
         dest.writeString(this.descrip);
         dest.writeInt(this.poster ? 1 : 0);
         dest.writeInt(this.confid);
-        dest.writeString(this.nameSupervisor);
+        dest.writeString(this.forenameSupervisor);
+        dest.writeString(this.surnameSupervisor);
+        dest.writeInt(this.juryId);
     }
 }
