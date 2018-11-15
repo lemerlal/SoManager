@@ -42,21 +42,17 @@ public class Projects implements Parcelable{
     private int confid;
 
     @NonNull
-    private int idSupervisor;
-
-    public Projects(int projectID, @NonNull String title){
-        this.projectID=projectID;
-        this.title=title;
-    }
+    private String nameSupervisor;
 
 
-    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull int idSupervisors) {
+
+    public Projects(int projectID, @NonNull String title, @NonNull String descrip, @NonNull Boolean poster, @NonNull int confid, @NonNull String nameSupervisor) {
         this.projectID = projectID;
         this.title = title;
         this.descrip = descrip;
         this.poster = poster;
         this.confid = confid;
-        this.idSupervisor = idSupervisor;
+        this.nameSupervisor = nameSupervisor;
     }
 
     @Ignore
@@ -66,7 +62,7 @@ public class Projects implements Parcelable{
         this.descrip = in.readString();
         this.poster = (in.readInt() == 0) ? false : true;
         this.confid = in.readInt();
-        this.idSupervisor = in.readInt();
+        this.nameSupervisor = in.readString();
     }
 
 
@@ -117,12 +113,12 @@ public class Projects implements Parcelable{
 
 
     @NonNull
-    public int getIdSupervisor() {
-        return idSupervisor;
+    public String getNameSupervisor() {
+        return nameSupervisor;
     }
 
-    public void setIdSupervisor(@NonNull int idSupervisor) {
-        this.idSupervisor = idSupervisor;
+    public void setNameSupervisor(@NonNull String nameSupervisor) {
+        this.nameSupervisor = nameSupervisor;
     }
 
     @Ignore
@@ -137,6 +133,6 @@ public class Projects implements Parcelable{
         dest.writeString(this.descrip);
         dest.writeInt(this.poster ? 1 : 0);
         dest.writeInt(this.confid);
-        dest.writeInt(this.idSupervisor);
+        dest.writeString(this.nameSupervisor);
     }
 }

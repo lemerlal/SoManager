@@ -16,6 +16,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pfe_button" />
+        <Button
+            android:id="@+id/my_pfe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My PFE" />
+
+        <Button
+            android:id="@+id/my_jurries_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My JURY" />
 
         <Button
             android:id="@+id/juries_button"

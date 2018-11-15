@@ -24,14 +24,14 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
 
     private static String[] INSERT_Juries = new String[] {
 
-            "INSERT INTO juries VALUES(1,15,1);",
-            "INSERT INTO juries VALUES(2,15,2);",
+            //"INSERT INTO juries VALUES(1,15,1);",
+            //"INSERT INTO juries VALUES(2,15,2);",
 
 
     };
     private static String[] INSERT_Notes = new String[]{
-            "INSERT INTO notes VALUES(1,'alexandre','Miroslav',15,19);",
-            "INSERT INTO notes VALUES(2,'thomas','Johan',10, 14);",
+            //"INSERT INTO notes VALUES(1,'alexandre','Miroslav',15,19);",
+            //"INSERT INTO notes VALUES(2,'thomas','Johan',10, 14);",
 
     };
 
@@ -42,6 +42,7 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
     };
 
     private static String[] INSERT_Projects = new String[] {
+            /**
             "INSERT INTO projects VALUES(1,'a','dcdscd','false',1,1);",
             "INSERT INTO projects VALUES(2,'b','ghhhgh','true',0,2);",
             "INSERT INTO projects VALUES(3,'c','ghhhgh','true',0,2);",
@@ -52,7 +53,7 @@ public class SoManagerDatabaseCallback extends RoomDatabase.Callback {
             "INSERT INTO projects VALUES(8,'i','ghhhgh','true',0,2);",
             "INSERT INTO projects VALUES(9,'j','ghhhgh','true',0,2);",
 
-
+*/
 
 
     };
