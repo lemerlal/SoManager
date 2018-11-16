@@ -21,6 +21,7 @@
         <activity android:name=".MenuActivity">
         </activity>
         <activity android:name=".PFEActivity"></activity>
+        <activity android:name=".PFE5Activity"></activity>
         <activity android:name=".MyPFEActivity"></activity>
         <activity android:name=".PFEDetailsActivity"></activity>
         <activity android:name=".MyPFEDetailsActivity"></activity>

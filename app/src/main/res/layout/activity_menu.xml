@@ -24,6 +24,12 @@
             android:text="My PFE" />
 
         <Button
+            android:id="@+id/pfe_porte_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pfe_porte_button" />
+
+        <Button
             android:id="@+id/my_jurries_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

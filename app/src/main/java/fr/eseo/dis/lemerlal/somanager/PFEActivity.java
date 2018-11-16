@@ -53,31 +53,10 @@ public class PFEActivity extends AppCompatActivity {
         pfeAdapter = new PFEAdapter(this);
         recycler.setAdapter(pfeAdapter);
         loadAllProjectsData();
-        Button pfeRandomSecondActivityButton = findViewById(R.id.pfe_random_button);
-        pfeRandomSecondActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFiveProjectsData();
-            }
-        });
     }
 
     private void loadAllProjectsData(){
         pfeAdapter.setProjects(SoManagerDatabase.getDatabase(PFEActivity.this).projectsDao().findAllProjects());
-    }
-
-    private void loadFiveProjectsData(){
-        recycler.getRecycledViewPool().clear();
-        List<Projects> allProjects =SoManagerDatabase.getDatabase(PFEActivity.this).projectsDao().findProjectsNoConfid();
-        List<Projects> fiveProjects = new ArrayList<>();
-        Random random = new Random();
-        for(int i=0; i<5; i++){
-            int randomProject = random.nextInt(allProjects.size());
-            fiveProjects.add(allProjects.get(randomProject));
-            allProjects.remove(randomProject);
-        }
-        pfeAdapter.setProjects(fiveProjects);
-        pfeAdapter.notifyDataSetChanged();
     }
 
     public void clickProjectCard(Projects project) {

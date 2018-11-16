@@ -52,8 +52,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button pfeSecondActivityButton = findViewById(R.id.my_pfe_button);
-        pfeSecondActivityButton.setOnClickListener(new View.OnClickListener() {
+        Button mypfeSecondActivityButton = findViewById(R.id.my_pfe_button);
+        mypfeSecondActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -86,12 +86,32 @@ public class MenuActivity extends AppCompatActivity {
                                         String forename = jsonObjectSupervisor.getString("forename");
                                         String surname = jsonObjectSupervisor.getString("surname");
 
+                                        JSONArray jsonStudents = jsonObjectProject.getJSONArray("students");
+                                        for (int j=0; j<jsonStudents.length();j++){
+                                            JSONObject jsonObjectStudent= jsonStudents.getJSONObject(j);
+                                            int studentId = jsonObjectStudent.getInt("userId");
+                                            String forenameS = jsonObjectStudent.getString("forename");
+                                            String surnameS = jsonObjectStudent.getString("surname");
+                                            Students student = new Students(studentId,forenameS,surnameS);
+                                            if(SoManagerDatabase.getDatabase(MenuActivity.this).studentsDao().findNotesFromIdStudent(studentId)==null){
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).studentsDao().updateMyStudents(student);
+
+                                            }
+                                        }
+
                                         Projects projects = new Projects(id,title,description,poster,confid,forename,surname);
                                         idPFE.add(id);
                                         for (int j=0 ; j<= idPFE.size();j++) {
                                             if (SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0) {
                                                 SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(projects);
 
+                                            }else{
+                                                Projects update = SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).get(0);
+                                                update.setDescrip(description);
+                                                update.setPoster(poster);
+                                                update.setConfid(confid);
+                                                update.setSurnameSupervisor(surname);
+                                                update.setForenameSupervisor(forename);
                                             }
                                         }
 
@@ -104,6 +124,75 @@ public class MenuActivity extends AppCompatActivity {
                                     editor.apply();
 
                                     Intent intent = new Intent(MenuActivity.this, MyPFEActivity.class);
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Log.e("RESULTERROR",volleyError.getMessage()); }
+                        } );
+                rq.add(s);
+
+
+            }
+        });
+
+        Button pfe5SecondActivityButton = findViewById(R.id.pfe_porte_button);
+        pfe5SecondActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences pref;
+                pref = getApplicationContext().getSharedPreferences("PortePref", 0);
+                String username = pref.getString("username", null);
+                String token = pref.getString("token", null);
+
+                String url ="https://192.168.4.248/pfe/webservice.php?q=PORTE&user="+username+"&token="+token;
+                WebServiceRequest webServiceRequest =new WebServiceRequest(MenuActivity.this);
+                SSLSocketFactory certificat =webServiceRequest.getSocketFactory();
+
+                RequestQueue rq = Volley.newRequestQueue(MenuActivity.this, new HurlStack(null, certificat));
+
+                JsonObjectRequest s = new JsonObjectRequest(Request.Method.GET,  url,   null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject s) {
+                                try {
+                                    Log.e("RESULNOOTEEEEEEEE", String.valueOf(s));
+                                    JSONArray jsonProject = s.getJSONArray("projects");
+                                    for (int i=0; i<jsonProject.length();i++){
+                                        JSONObject jsonObjectProject = jsonProject.getJSONObject(i);
+                                        int id =jsonObjectProject.getInt("idProject");
+                                        String title =jsonObjectProject.getString("title");
+                                        String description =jsonObjectProject.getString("description");
+                                        //Boolean poster =jsonObjectProject.getBoolean("poster"); ici image TODO
+
+                                        Projects projects = new Projects(true,id,title,description);
+                                        idPFE.add(id);
+                                        for (int j=0 ; j<= idPFE.size();j++) {
+                                            if (SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0) {
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(projects);
+
+                                            }else {
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).get(0).setPorte(true);
+                                            }
+                                        }
+
+                                    }
+
+                                    Gson gson = new Gson();
+                                    String jsonText = gson.toJson(idPFE);
+                                    SharedPreferences prefMyPFE = getApplicationContext().getSharedPreferences("prefPortePFE", 0); // 0 - for private mode
+                                    SharedPreferences.Editor editor = prefMyPFE.edit();
+                                    editor.putString("listePortePFE", jsonText);
+                                    editor.apply();
+
+                                    Intent intent = new Intent(MenuActivity.this, PFE5Activity.class);
                                     startActivity(intent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -162,6 +251,8 @@ public class MenuActivity extends AppCompatActivity {
                                             if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
                                                 SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(project);
 
+                                            }else{
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).get(0).setJuryId(id);
                                             }
                                         }
                                         Juries juries = new Juries(id,date);
@@ -249,9 +340,17 @@ public class MenuActivity extends AppCompatActivity {
                                         if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
                                             SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(projects);
 
+                                        }else{
+                                            Projects update = SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).get(0);
+                                            update.setDescrip(description);
+                                            update.setPoster(poster);
+                                            update.setConfid(confid);
+                                            update.setSurnameSupervisor(surname);
+                                            update.setForenameSupervisor(forename);
                                         }
 
                                     }
+
                                     Intent intent = new Intent(MenuActivity.this, PFEActivity.class);
                                     startActivity(intent);
                                 } catch (JSONException e) {
@@ -310,6 +409,8 @@ public class MenuActivity extends AppCompatActivity {
                                             if(SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).size()== 0){
                                                 SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().updateMyProject(project);
 
+                                            }else{
+                                                SoManagerDatabase.getDatabase(MenuActivity.this).projectsDao().findFromIdProjects(id).get(0).setJuryId(id);
                                             }
                                         }
                                         Juries juries = new Juries(id,date);
